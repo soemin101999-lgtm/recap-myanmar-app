@@ -1,12 +1,115 @@
 <!DOCTYPE html>
 <html lang="my">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RECAP MYANMAR</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RECAP MYANMAR</title>
+<style>
+body {
+  margin: 0;
+  padding: 20px;
+  background: #101522;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+.container {
+  max-width: 500px;
+  margin: auto;
+}
+h1 {
+  color: #20d6ae;
+  text-align: center;
+}
+.panel {
+  background: #202a3c;
+  padding: 20px;
+  border-radius: 15px;
+  margin-top: 20px;
+}
+input, select, button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 12px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+button {
+  background: #20d6ae;
+  color: #101522;
+  font-weight: bold;
+}
+video {
+  width: 100%;
+  margin-top: 15px;
+  border-radius: 10px;
+}
+.note {
+  color: #bbb;
+  font-size: 13px;
+}
+</style>
 </head>
 <body>
-  <h1>RECAP MYANMAR</h1>
-  <p>မြန်မာဘာသာဖြင့် ဗီဒီယိုပြန်ဆိုခြင်း App</p>
+<div class="container">
+
+<h1>🎬 RECAP MYANMAR</h1>
+<p style="text-align:center">မြန်မာဘာသာဖြင့် ဗီဒီယိုပြန်ဆိုခြင်း</p>
+
+<div class="panel">
+<h3>📁 ဗီဒီယိုရွေးချယ်ရန်</h3>
+
+<input type="file" id="videoFile" accept="video/*">
+
+<video id="preview" controls hidden></video>
+
+<h3>ဘာသာပြန်မည့်ဘာသာ</h3>
+<select id="language">
+<option value="my">မြန်မာဘာသာ</option>
+</select>
+
+<h3>အသံရွေးချယ်ရန်</h3>
+<select id="voice">
+<option value="male">အမျိုးသားအသံ</option>
+<option value="female">အမျိုးသမီးအသံ</option>
+</select>
+
+<button onclick="startApp()">စတင်လုပ်ဆောင်မည်</button>
+
+<p id="status">ဗီဒီယိုဖိုင်ကို ရွေးချယ်ပါ။</p>
+
+<p class="note">
+ယခုအဆင့်တွင် ဗီဒီယိုရွေးချယ်ခြင်းနှင့် ကြည့်ရှုခြင်းကိုသာ စမ်းသပ်နိုင်ပါသည်။
+မြန်မာအသံပြောင်းရန် AI Server ချိတ်ဆက်ရန် လိုအပ်ပါသည်။
+</p>
+</div>
+</div>
+
+<script>
+const input = document.getElementById("videoFile");
+const preview = document.getElementById("preview");
+const status = document.getElementById("status");
+
+input.addEventListener("change", function() {
+  const file = this.files[0];
+
+  if (file) {
+    preview.src = URL.createObjectURL(file);
+    preview.hidden = false;
+    status.textContent = "ဗီဒီယိုရွေးချယ်ပြီးပါပြီ။";
+  }
+});
+
+function startApp() {
+  if (!input.files.length) {
+    status.textContent = "ဗီဒီယိုအရင်ရွေးချယ်ပါ။";
+    return;
+  }
+
+  status.textContent =
+    "ဗီဒီယိုရွေးချယ်ပြီးပါပြီ။ AI Server ချိတ်ဆက်ရန် လိုအပ်ပါသည်။";
+}
+</script>
 </body>
 </html>
